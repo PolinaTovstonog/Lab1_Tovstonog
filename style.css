@@ -1,0 +1,555 @@
+/* ==========================================================
+   1. ОБЩИЕ НАСТРОЙКИ И ПЕРЕМЕННЫЕ
+   Переменные позволяют менять оформление сразу на всём сайте.
+   ========================================================== */
+
+   :root {
+    --page-bg: #f7f5fb;          /* Основной фон страницы. */
+    --surface: #ffffff;        /* Фон карточек и шапки. */
+    --text: #292539;            /* Основной цвет текста. */
+    --muted: #625c73;           /* Цвет второстепенных подписей. */
+    --accent: #6741ad;          /* Основной акцентный цвет. */
+    --accent-dark: #4d2c88;     /* Цвет активного взаимодействия. */
+    --accent-light: #eee7fa;    /* Светлый фон выделенных элементов. */
+    --border: #ded7e9;          /* Цвет границ. */
+    --radius: 24px;            /* Общее скругление крупных карточек. */
+    --shadow: 0 12px 36px rgb(48 31 82 / 7%); /* Мягкая тень. */
+}
+
+/* Размер элемента включает внутренние отступы и границы.
+   Это облегчает расчёт ширины и предотвращает переполнение. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;                         /* Убираем стандартный отступ браузера. */
+    min-height: 100vh;                  /* Страница занимает не меньше высоты окна. */
+    display: flex;                     /* Располагаем шапку, main и подвал гибко. */
+    flex-direction: column;            /* Основные области идут сверху вниз. */
+    font-family: Arial, Helvetica, sans-serif; /* Используем локальные шрифты. */
+    font-size: 16px;
+    line-height: 1.7;                   /* Делаем длинный текст удобным для чтения. */
+    color: var(--text);
+    background: var(--page-bg);
+    overflow-wrap: anywhere;            /* Очень длинные слова не расширяют страницу. */
+}
+
+/* Общая ширина содержимого: до 1120px на ПК и с отступами на телефоне. */
+.container {
+    width: min(1120px, calc(100% - 40px));
+    margin-inline: auto;                /* Центрируем контейнер по горизонтали. */
+}
+
+.main-content {
+    flex: 1;                           /* При коротком содержимом подвал остаётся внизу. */
+    padding-block: 48px 64px;
+    min-width: 0;
+}
+
+/* Убираем верхние отступы для предсказуемой вертикальной композиции. */
+h1,
+h2,
+h3,
+p {
+    margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: clamp(2rem, 5vw, 3.5rem); /* Размер плавно меняется вместе с экраном. */
+    letter-spacing: -0.04em;
+}
+
+h2 {
+    margin-bottom: 18px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    letter-spacing: -0.025em;
+}
+
+h3 {
+    margin-bottom: 14px;
+    font-size: 1.2rem;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+a {
+    color: var(--accent);
+    text-underline-offset: 4px;         /* Отодвигаем подчёркивание от букв. */
+}
+
+a:hover {
+    color: var(--accent-dark);
+}
+
+/* Видимый контур помогает пользователям, которые перемещаются клавишей Tab. */
+a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 5px;
+}
+
+/* ==========================================================
+   2. ССЫЛКА БЫСТРОГО ПЕРЕХОДА
+   Обычно скрыта за экраном, появляется при фокусе с клавиатуры.
+   ========================================================== */
+
+.skip-link {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 10;
+    padding: 10px 16px;
+    color: var(--surface);
+    background: var(--accent-dark);
+    border-radius: 10px;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* ==========================================================
+   3. ШАПКА И CSS-ЛОГОТИП
+   Flexbox располагает бренд слева, а меню справа.
+   ========================================================== */
+
+.site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;    /* Разводим бренд и меню по краям. */
+    align-items: center;               /* Выравниваем элементы по вертикали. */
+    gap: 24px;
+    padding-block: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+    color: var(--text);
+    text-decoration: none;
+}
+
+/* Логотип размером 68 × 68px.
+   Изображений нет: только буква, рамка, градиент, тень и скругление. */
+.logo {
+    display: grid;
+    place-items: center;               /* Центрируем букву по обеим осям. */
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;                     /* Не даём Flexbox уменьшать логотип. */
+    border: 2px solid var(--accent);
+    border-radius: 22px 22px 22px 8px;
+    background: linear-gradient(135deg, #f2eaff, #d8c7f5);
+    box-shadow: 4px 4px 0 var(--accent-light);
+    color: var(--accent-dark);
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.brand-text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.brand-caption {
+    display: block;                    /* Подпись начинается с новой строки. */
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* ==========================================================
+   4. НАВИГАЦИЯ
+   Убираем стандартные маркеры списка и располагаем ссылки в ряд.
+   ========================================================== */
+
+.nav-list {
+    display: flex;
+    flex-wrap: wrap;                    /* При нехватке места пункты переносятся. */
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list a {
+    display: block;
+    padding: 10px 16px;
+    border-radius: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* aria-current одновременно сообщает текущую страницу
+   вспомогательным технологиям и служит селектором оформления. */
+.nav-list a[aria-current="page"],
+.nav-list a:hover {
+    color: var(--accent-dark);
+    background: var(--accent-light);
+}
+
+/* ==========================================================
+   5. ВВОДНЫЙ БЛОК И КНОПКИ-ССЫЛКИ
+   Grid создаёт две колонки разной ширины.
+   ========================================================== */
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 48px;
+}
+
+.eyebrow {
+    margin-bottom: 12px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.hero-description {
+    max-width: 62ch;                    /* Ограничиваем длину строки для читаемости. */
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;                   /* Достаточная высота для касания пальцем. */
+    padding: 12px 22px;
+    border: 1px solid transparent;
+    border-radius: 14px;
+    background: var(--accent);
+    color: var(--surface);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover {
+    background: var(--accent-dark);
+    color: var(--surface);
+}
+
+.intro-card {
+    padding: 30px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, #ffffff, #eee7fa);
+    box-shadow: var(--shadow);
+}
+
+.card-label {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 5px 12px;
+    border-radius: 999px;               /* Получаем форму вытянутой капсулы. */
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.intro-card p {
+    margin-bottom: 0;
+    color: var(--muted);
+}
+
+/* ==========================================================
+   6. СТАТЬЯ И ОБТЕКАНИЕ ИЗОБРАЖЕНИЙ
+   Float применяется только к картинкам, не к макету сайта.
+   ========================================================== */
+
+.article-card,
+.content-card {
+    padding: 36px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    min-width: 0;                       /* Разрешаем карточкам сжиматься внутри Grid. */
+}
+
+.article-header {
+    margin-bottom: 28px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.article-lead {
+    margin-bottom: 0;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+/* flow-root создаёт независимый контекст форматирования.
+   Благодаря этому контейнер учитывает высоту плавающих картинок. */
+.article-body {
+    display: flow-root;
+}
+
+.article-body p {
+    text-align: left;
+}
+
+/* Каждый подраздел начинается ниже предыдущих плавающих картинок.
+   Внутри подраздела следующий за картинкой абзац обтекает её. */
+.article-body h3 {
+    clear: both;
+    padding-top: 12px;
+}
+
+.article-image {
+    display: block;
+    width: 280px;
+    max-width: 44%;                     /* На средних экранах оставляем место тексту. */
+    height: auto;
+    aspect-ratio: 28 / 19;              /* Сохраняем заданные пропорции области. */
+    object-fit: cover;                  /* Фото заполняет область без искажения. */
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--accent-light);    /* Фон области до загрузки изображения. */
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.float-left {
+    float: left;                       /* Прижимаем картинку влево, текст идёт справа. */
+    margin: 5px 24px 18px 0;            /* Отделяем изображение от текста. */
+}
+
+.float-right {
+    float: right;                      /* Прижимаем картинку вправо, текст идёт слева. */
+    margin: 5px 0 18px 24px;
+}
+
+.article-body > :last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================
+   7. СТРАНИЦА ЛАБОРАТОРНОЙ РАБОТЫ
+   Основная колонка шире вспомогательной.
+   ========================================================== */
+
+.page-intro {
+    margin-bottom: 36px;
+}
+
+.task-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+    align-items: start;                 /* Карточки не растягиваются по высоте ряда. */
+    gap: 24px;
+}
+
+.content-card h2:not(:first-child) {
+    margin-top: 32px;
+}
+
+.content-card > :last-child {
+    margin-bottom: 0;
+}
+
+.check-list {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.check-list li {
+    margin-bottom: 10px;
+    padding-left: 4px;
+}
+
+.check-list li::marker {
+    color: var(--accent);              /* Выделяем маркеры списка акцентным цветом. */
+}
+
+.project-details {
+    margin: 0 0 28px;
+}
+
+.project-details dt {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.project-details dt:first-child {
+    margin-top: 0;
+}
+
+.project-details dd {
+    margin: 4px 0 0;                    /* Убираем стандартный левый отступ dd. */
+    font-weight: 600;
+}
+
+.task-aside .button {
+    width: 100%;
+}
+
+/* ==========================================================
+   8. ПОДВАЛ
+   На широком экране подпись и ссылка находятся по краям.
+   ========================================================== */
+
+.site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-block: 24px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.footer-inner p {
+    margin: 0;
+}
+
+.footer-inner a {
+    font-weight: 600;
+}
+
+/* ==========================================================
+   9. АДАПТИВНОСТЬ: ПЛАНШЕТЫ И УЗКИЕ ОКНА
+   Правила действуют при ширине области просмотра не более 800px.
+   ========================================================== */
+
+@media (max-width: 800px) {
+    .header-inner {
+        flex-wrap: wrap;               /* Разрешаем меню перейти на следующую строку. */
+    }
+
+    .hero,
+    .task-grid {
+        grid-template-columns: minmax(0, 1fr); /* Заменяем две колонки одной. */
+    }
+
+    .hero {
+        gap: 24px;
+    }
+
+    .main-content {
+        padding-block: 32px 48px;
+    }
+
+    .article-card,
+    .content-card {
+        padding: 28px;
+    }
+}
+
+/* ==========================================================
+   10. АДАПТИВНОСТЬ: СМАРТФОНЫ
+   Уменьшаем отступы, перестраиваем меню и отменяем float.
+   ========================================================== */
+
+@media (max-width: 560px) {
+    .container {
+        width: calc(100% - 28px);       /* Оставляем по 14px с каждой стороны. */
+    }
+
+    .header-inner {
+        gap: 20px;
+        padding-block: 16px;
+    }
+
+    .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px 18px 18px 6px;
+        font-size: 28px;
+    }
+
+    .site-nav {
+        width: 100%;                   /* Меню занимает отдельную строку. */
+    }
+
+    .nav-list {
+        gap: 8px;
+    }
+
+    .nav-list li {
+        flex: 1 1 130px;               /* Пункты делят строку; при необходимости переносятся. */
+    }
+
+    .nav-list a {
+        padding: 11px 12px;
+        text-align: center;
+    }
+
+    .hero {
+        margin-bottom: 28px;
+    }
+
+    .hero-description,
+    .article-lead {
+        font-size: 16px;
+    }
+
+    .intro-card,
+    .article-card,
+    .content-card {
+        padding: 22px;
+        border-radius: 20px;
+    }
+
+    .article-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .float-left,
+    .float-right {
+        float: none;                   /* На телефоне текст идёт под изображением. */
+        margin: 0 0 20px;
+    }
+
+    .footer-inner {
+        flex-direction: column;        /* Элементы подвала располагаются вертикально. */
+        align-items: flex-start;
+        gap: 8px;
+    }
+}
+
+/* Уважение настройки пользователя, который предпочитает меньше анимации. */
+@media (prefers-reduced-motion: reduce) {
+    .nav-list a,
+    .button {
+        transition: none;
+    }
+}
