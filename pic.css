@@ -1,0 +1,282 @@
+/* Область рисунка */
+.dog-pic {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background: white;
+    overflow: hidden;
+}
+
+/* Координаты деталей отсчитываются от области рисунка */
+.dog-pic span,
+.dog-pic .tail::after {
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+}
+
+/* Хвост-месяц */
+.dog-pic .tail {
+    left: 128px;
+    top: 47px;
+    width: 30px;
+    height: 30px;
+    background: #98734f;
+    border-radius: 50%;
+}
+
+/* Белый круг закрывает часть хвоста */
+.dog-pic .tail::after {
+    content: "";
+    left: -9px;
+    top: -8px;
+    width: 31px;
+    height: 31px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* Общие свойства четырёх лап */
+.dog-pic .leg {
+    top: 89px;
+    width: 9px;
+    height: 38px;
+    background: #90704f;
+    border-radius: 6px;
+}
+
+.dog-pic .far-front {
+    left: 87px;
+}
+
+.dog-pic .far-back {
+    left: 117px;
+}
+
+/* Ближние лапы немного шире и светлее */
+.dog-pic .front,
+.dog-pic .back {
+    top: 87px;
+    width: 12px;
+    height: 40px;
+    background: #b79771;
+}
+
+.dog-pic .front {
+    left: 81px;
+    transform: rotate(8deg);
+}
+
+.dog-pic .back {
+    left: 119px;
+    transform: rotate(-12deg);
+}
+
+/* Туловище */
+.dog-pic .body {
+    left: 71px;
+    top: 62px;
+    width: 72px;
+    height: 34px;
+    background: #a17e59;
+    border-radius: 50%;
+}
+
+/* Голова и мордочка */
+.dog-pic .head,
+.dog-pic .muzzle {
+    background: #bfa37c;
+}
+
+.dog-pic .head {
+    left: 56px;
+    top: 26px;
+    width: 34px;
+    height: 43px;
+    border-radius: 48%;
+}
+
+.dog-pic .muzzle {
+    left: 37px;
+    top: 37px;
+    width: 36px;
+    height: 24px;
+    border-radius: 4px 12px 12px 5px;
+}
+
+/* Нос */
+.dog-pic .nose {
+    left: 35px;
+    top: 34px;
+    width: 10px;
+    height: 11px;
+    background: #705b43;
+    border-radius: 45%;
+}
+
+/* Глаз */
+.dog-pic .eye {
+    left: 63px;
+    top: 30px;
+    width: 6px;
+    height: 6px;
+    background: #302922;
+    border-radius: 50%;
+}
+
+/* Висячее ухо */
+.dog-pic .ear {
+    left: 70px;
+    top: 29px;
+    width: 25px;
+    height: 45px;
+    background: #dfceb0;
+    border-radius: 50%;
+}
+
+/* Постамент */
+.dog-pic .platform {
+    left: 71px;
+    top: 127px;
+    width: 67px;
+    height: 55px;
+    background: #ed963e;
+    border-radius: 6px 6px 2px 2px;
+}
+
+/* Ступни поверх постамента */
+.dog-pic .paw {
+    top: 122px;
+    width: 17px;
+    height: 8px;
+    background: #aa8963;
+    border-radius: 50%;
+}
+
+.dog-pic .front-paw {
+    left: 78px;
+}
+
+.dog-pic .back-paw {
+    left: 118px;
+}
+
+/* Одна полоска и две её копии с помощью тени */
+.dog-pic .stripes {
+    left: 83px;
+    top: 139px;
+    width: 43px;
+    height: 3px;
+    background: #b96926;
+    box-shadow: 0 9px #b96926, 0 18px #b96926;
+}
+
+/* Треугольники из границ элемента */
+.dog-pic .triangle {
+    top: 164px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 11px solid #b96926;
+}
+
+.dog-pic .triangle-one {
+    left: 81px;
+}
+
+.dog-pic .triangle-two {
+    left: 98px;
+}
+
+.dog-pic .triangle-three {
+    left: 115px;
+}
+
+/* Основание постамента */
+.dog-pic .base {
+    left: 65px;
+    top: 179px;
+    width: 79px;
+    height: 7px;
+    background: #d77d2d;
+    border-radius: 5px;
+}
+
+/* Отдельная карточка рисунка */
+.drawing-card {
+    margin-bottom: 48px;
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid #ded7e9;
+    border-radius: 24px;
+    box-shadow: 0 12px 36px rgb(48 31 82 / 7%);
+}
+
+/* Заголовок карточки */
+.drawing-card h2 {
+    margin: 0 0 28px;
+}
+
+/* Рисунок слева, описание справа */
+.drawing-layout {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+/* Область рисунка и подписи */
+.drawing-figure {
+    flex: 0 0 200px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Убираем отдельный фон и проверочную рамку */
+.drawing-card .dog-pic {
+    margin: 0 auto;
+    background: transparent;
+    outline: none;
+}
+
+/* Вырез хвоста сливается с белой карточкой */
+.drawing-card .tail::after,
+.drawing-card .dog-tail-cut {
+    background: #ffffff;
+}
+
+/* Подпись под собакой */
+.drawing-figure figcaption {
+    margin-top: 12px;
+    color: #625c73;
+    font-size: 13px;
+}
+
+/* Текст рядом с рисунком */
+.drawing-description {
+    flex: 1;
+    min-width: 0;
+    color: #625c73;
+}
+
+.drawing-description p:last-child {
+    margin-bottom: 0;
+}
+
+/* На телефоне описание располагается под рисунком */
+@media (max-width: 600px) {
+    .drawing-card {
+        padding: 22px;
+        margin-bottom: 28px;
+    }
+
+    .drawing-layout {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .drawing-figure {
+        flex: none;
+        width: 200px;
+    }
+}
