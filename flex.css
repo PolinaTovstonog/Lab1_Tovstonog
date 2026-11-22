@@ -1,0 +1,256 @@
+/* Расположение задания и описания */
+
+.flex-task-layout {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.flex-task-figure {
+    flex: 0 0 200px;
+    width: 200px;
+    margin: 0;
+    text-align: center;
+}
+
+.flex-task-figure figcaption {
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.flex-task-description {
+    flex: 1;
+    min-width: 0;
+    color: var(--muted);
+}
+
+/* Flex-элемент размером 200 × 200 px */
+
+.fairy-flex {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    width: 200px;
+    height: 200px;
+    padding: 0;
+    overflow: hidden;
+
+    border: 0;
+    border-radius: 12px;
+    background: #ffffff;
+
+    cursor: pointer;
+}
+
+.fairy-toggle:focus-visible + .fairy-flex {
+    outline: 3px solid var(--accent);
+    outline-offset: 5px;
+}
+
+/* Области с персонажами */
+
+.fairy-prince,
+.fairy-partner {
+    position: relative;
+    flex: 0 0 100px;
+    height: 170px;
+}
+
+.fairy-flex img {
+    display: block;
+    max-width: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Скрытый checkbox */
+
+.fairy-toggle,
+.fairy-control-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Принц и принцесса */
+
+.fairy-prince img,
+.fairy-princess img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+    object-position: center bottom;
+}
+
+/* Лягушка */
+
+.fairy-frog {
+    position: absolute;
+    right: 20px;
+    bottom: 4px;
+
+    width: 55px;
+    height: auto;
+
+    opacity: 0;
+    transform: translateX(25px);
+
+    transition:
+        opacity 0.8s ease,
+        transform 1.2s ease;
+}
+
+.fairy-flex:hover .fairy-frog,
+.fairy-toggle:focus-visible + .fairy-flex .fairy-frog {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Надписи */
+
+.fairy-question,
+.fairy-answer {
+    position: absolute;
+    top: 6px;
+    right: 0;
+
+    width: 100px;
+
+    color: #16820b;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fairy-flex:hover .fairy-question,
+.fairy-toggle:focus-visible + .fairy-flex .fairy-question {
+    opacity: 1;
+}
+
+/* Принцесса */
+
+.fairy-princess {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    transform: scale(0.25);
+    transform-origin: center bottom;
+}
+
+/* Состояние после нажатия */
+
+.fairy-toggle:checked + .fairy-flex .fairy-frog,
+.fairy-toggle:checked + .fairy-flex .fairy-question {
+    opacity: 0;
+    transition: none;
+}
+
+.fairy-toggle:checked + .fairy-flex .fairy-answer {
+    opacity: 1;
+}
+
+.fairy-toggle:checked + .fairy-flex .fairy-princess {
+    animation: princess-appear 0.9s ease forwards;
+}
+
+/* Flex-элемент поворачивается и возвращается */
+
+.fairy-toggle:checked + .fairy-flex {
+    animation: flex-turn 1s ease 0.6s;
+}
+
+@keyframes princess-appear {
+    from {
+        opacity: 0;
+        transform: scale(0.25);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes flex-turn {
+    0% {
+        transform: rotate(0);
+    }
+
+    35% {
+        transform: rotate(-8deg);
+    }
+
+    70% {
+        transform: rotate(8deg);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+/* Адаптивность */
+
+@media (max-width: 600px) {
+    .flex-task {
+        padding: 22px;
+    }
+
+    .flex-task-layout {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .flex-task-figure {
+        flex: none;
+    }
+
+    .flex-task-description {
+        width: 100%;
+    }
+}
+
+@media (max-width: 360px) {
+    .flex-task {
+        padding: 14px;
+    }
+}
+
+/* Если пользователь отключил анимации */
+
+@media (prefers-reduced-motion: reduce) {
+    .fairy-flex,
+    .fairy-flex * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .fairy-toggle:checked + .fairy-flex .fairy-princess {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

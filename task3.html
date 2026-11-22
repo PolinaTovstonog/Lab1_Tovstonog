@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Учебное задание: интерактивный элемент на Flexbox.">
+
+    <title>Задание № 3 — Flexbox</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="flex.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">
+                <span class="logo" aria-hidden="true">Т</span>
+
+                <span class="brand-text">
+                    Товстоног Полина Леонидовна, з5130903/40301
+                    <span class="brand-caption">Портфолио студентки</span>
+                </span>
+            </a>
+
+            <nav class="site-nav" aria-label="Основная навигация">
+                <ul class="nav-list">
+                    <li>
+                        <a href="index.html">Главная</a>
+                    </li>
+                    <li>
+                        <a href="task1.html">Задание № 1</a>
+                    </li>
+                    <li>
+                        <a href="task3.html" aria-current="page">Задание № 3</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <section class="page-intro">
+            <p class="eyebrow">Задание № 3. Вариант 1</p>
+
+            <h1>Flexbox: принц и лягушка</h1>
+
+            <p class="hero-description">
+                Изменение состояния элемента при наведении и нажатии.
+            </p>
+        </section>
+
+        <section class="content-card flex-task">
+            <h2>Сказочное превращение</h2>
+
+            <div class="flex-task-layout">
+                <figure class="flex-task-figure">
+
+                    <!-- Флажок хранит состояние: включён или выключен. -->
+                    <input
+                        class="fairy-toggle"
+                        type="checkbox"
+                        id="fairy-toggle"
+                    >
+
+                    <!-- Нажатие на label переключает связанный с ним флажок. -->
+                    <label class="fairy-flex" for="fairy-toggle">
+
+                        <span class="fairy-prince">
+                            <img
+                                src="images/prince.png"
+                                alt="Принц"
+                                draggable="false"
+                            >
+                        </span>
+
+                        <span class="fairy-partner">
+                            <img
+                                class="fairy-frog"
+                                src="images/frog.png"
+                                alt=""
+                                draggable="false"
+                            >
+
+                            <span class="fairy-princess">
+                                <img
+                                    src="images/princess.png"
+                                    alt=""
+                                    draggable="false"
+                                >
+                            </span>
+                        </span>
+
+                        <span class="fairy-question">Ты кто?</span>
+                        <span class="fairy-answer">Принцесса</span>
+
+                        <span class="fairy-control-text">
+                            Превратить лягушку в принцессу
+                        </span>
+                    </label>
+
+                    <figcaption>
+                        Размер элемента: 200 × 200 px
+                    </figcaption>
+                </figure>
+
+                <div class="flex-task-description">
+                    <p>
+                        Наведи указатель на рисунок:
+                        лягушка появится и приблизится к принцу.
+                    </p>
+
+                    <p>
+                        Нажми на рисунок:
+                        вместо лягушки появится принцесса,
+                        а весь элемент повернётся и вернётся обратно.
+                    </p>
+
+                    <p>
+                        На телефоне достаточно коснуться рисунка.
+                    </p>
+                    <p>
+                        Нажми на рисунок ещё раз, чтобы вернуть начальное состояние.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>
+                © 2026 Товстоног Полина Леонидовна.
+                Учебное портфолио.
+            </p>
+
+            <a href="index.html">На главную →</a>
+        </div>
+    </footer>
+
+</body>
+</html>
