@@ -1,0 +1,57 @@
+/* Кнопки управления */
+.dom-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+/* Вторая кнопка (чуть светлее, чтобы отличалась) */
+.button-secondary {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+}
+
+.button-secondary:hover {
+    background: #dfd2f5;
+    color: var(--accent-dark);
+}
+
+/* Контейнер для вывода элементов */
+.rand-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 50px;
+}
+
+/* Общий базовый стиль для выводимых фраз */
+.phrase-item {
+    margin: 0;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    transition: all 0.2s ease;
+}
+
+/* Требуемый класс class1: нежный лавандовый фон */
+.class1 {
+    background-color: #f3edfc;
+    border-color: #d8c7f5;
+}
+
+/* Требуемый класс class2: тёплый персиково-кремовый фон */
+.class2 {
+    background-color: #fff8eb;
+    border-color: #fde0b2;
+}
+
+/* На мобильных устройствах кнопки растягиваются на всю ширину */
+@media (max-width: 560px) {
+    .dom-controls .button {
+        width: 100%;
+    }
+}

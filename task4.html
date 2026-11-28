@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Лабораторная работа: работа с DOM-деревом и событиями на JavaScript.">
+    <title>Задание № 4 — DOM</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="dom.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">
+                <span class="logo">Т</span>
+                <span class="brand-text">
+                    Товстоног Полина Леонидовна, з5130903/40301
+                    <span class="brand-caption">Портфолио студентки</span>
+                </span>
+            </a>
+
+            <nav class="site-nav">
+                <ul class="nav-list">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="task1.html">Задание № 1</a></li>
+                    <li><a href="task3.html">Задание № 3</a></li>
+                    <li><a href="task4.html" class="active">Задание № 4</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container main-content">
+        <section class="page-intro">
+            <p class="eyebrow">Задание №4</p>
+            <h1>DOM</h1>
+            <p class="hero-description">
+                Вариант 2. Генерация элементов, случайный неповторяющийся вывод фраз и манипуляции с классами и стилями.
+            </p>
+        </section>
+
+        <section class="content-card dom-card">
+            <h2>Латинские высказывания</h2>
+
+            <div class="dom-controls">
+                <button class="button" id="btn-create" type="button">Создать</button>
+                <button class="button button-secondary" id="btn-recolor" type="button">Перекрасить</button>
+            </div>
+
+            <div id="rand" class="rand-container"></div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <p>© 2026 Товстоног Полина Леонидовна. Учебное портфолио.</p>
+            <a href="index.html">На главную →</a>
+        </div>
+    </footer>
+
+    <script>
+
+        const latinPhrases = [
+            "Consuetudo est altera natura",
+            "Nota bene",
+            "Nulla calamitas sola",
+            "Per aspera ad astra",
+            "Veni, vidi, vici",
+            "Dum spiro, spero"
+        ];
+
+        const russianPhrases = [
+            "Привычка — вторая натура",
+            "Заметьте хорошо!",
+            "Беда не приходит одна",
+            "Через тернии к звёздам",
+            "Пришёл, увидел, победил",
+            "Пока дышу, надеюсь"
+        ];
+
+
+        let availableIndices = [];
+        for (let i = 0; i < latinPhrases.length; i++) {
+            availableIndices.push(i);
+        }
+
+
+        let phraseNumber = 0;
+
+  
+        const btnCreate = document.getElementById("btn-create");
+        const btnRecolor = document.getElementById("btn-recolor");
+        const randContainer = document.getElementById("rand");
+
+   
+        btnCreate.addEventListener("click", function () {
+  
+            if (availableIndices.length === 0) {
+                alert("Фразы закончились");
+                return;
+            }
+
+
+            const randomPos = Math.floor(Math.random() * availableIndices.length);
+            const phraseIndex = availableIndices[randomPos];
+
+
+            availableIndices.splice(randomPos, 1);
+
+
+            const p = document.createElement("p");
+
+            
+            if (phraseNumber % 2 === 0) {
+                p.className = "phrase-item class2";
+            } else {
+                p.className = "phrase-item class1";
+            }
+
+
+            p.innerHTML = "<u>n=" + phraseNumber + "</u> &nbsp; " +
+                          "<i>\"" + latinPhrases[phraseIndex] + "\"</i> &nbsp; " +
+                          "\"" + russianPhrases[phraseIndex] + "\"";
+
+
+            randContainer.appendChild(p);
+
+            phraseNumber++;
+        });
+
+        btnRecolor.addEventListener("click", function () {
+
+            const phrases = randContainer.getElementsByTagName("p");
+
+
+            for (let i = 0; i < phrases.length; i++) {
+
+                if (i % 2 === 0) {
+                    phrases[i].style.fontWeight = "bold";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
